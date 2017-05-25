@@ -1,0 +1,118 @@
+<div ng-controller="pageCtrl">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">成绩录入</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li" href="#/project-add.html"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mg-m text-m">考试名称 20160215高二(1)班语文小测试</div>
+        <div class="flex-column" ng-controller="importScoreCtrl">
+            <div class="flex-item-5 flex-row">
+                <div class="tab-list-wrap flex-item pd-m">
+                    <table-list list-data="../data/yuexuequan/table-subject.data" ng-model="currentSubject">
+                        <div class="loader" ng-if="status.isLoading">
+                            <div class="loader-inner pacman">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div ng-if="!status.isLoading">
+                            <div class="empty-wrap" ng-if="tbodyList.length==0">
+                                <div class="icon"><i class="iconfont icon-empty"></i></div>
+                                <div>什么也没有</div>
+                            </div>
+                            <div ng-if="tbodyList.length">
+                                <table class="table-list">
+                                    <thead>
+                                    <tr>
+                                        <th ng-repeat="th in theadList">{{th}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="tr in tbodyList" ng-click="selectThis()">
+                                        <td>{{tr.name}}</td>
+                                        <td>{{tr.score1}}</td>
+                                        <td>{{tr.score2}}</td>
+                                        <td>{{tr.score3}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </table-list>
+                </div>
+            </div>
+            <div class="flex-item-7 flex-row pdl-m">
+                <!-- 没有选择科目 -->
+                <div class="tab-list-wrap flex-item pd-m" ng-if="!currentSubject.name">
+                    <div class="empty-wrap">
+                        <div class="icon"><i class="iconfont icon-empty"></i></div>
+                        <div>请选择一个科目</div>
+                    </div>
+                </div>
+                <!-- 选择了科目 -->
+                <div class="tab-list-wrap flex-item pd-m" ng-if="currentSubject.name" ng-init="formData.subjectID=currentSubject.id">
+                    <div class="mg-m text-l">录入{{currentSubject.name}}成绩</div>
+                    <div class="mg-m pdb-m line">
+                        <div class="col-group">
+                            <div class="col-6">
+                                考生: <span angucomplete placeholder="输入考生姓名" title-field="text" url="../data/yuexuequan/select-person.data" class="inline-block" ng-model="formData.studentID"
+                                          ng-change="typeStudent()"></span>
+                            </div>
+                            <div class="col-6">
+                                成绩: <input type="number" min="0" max="150" class="ipt ipt-short" ng-model="formData.studentScore" ng-keyup="typeScore($event,'../data/form.data',formData)"
+                                           placeholder="输入成绩"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 没有输入学生时 -->
+                    <div class="mg-m" ng-if="!formData.studentID">
+                        <div class="empty-wrap">
+                            <div class="icon"><i class="iconfont icon-empty"></i></div>
+                            <div>请输入学生</div>
+                        </div>
+                    </div>
+                    <!-- 有学生ID -->
+                    <div class="mg-m" ng-if="formData.studentID" details-info="../data/yuexuequan/student-details.data"
+                         details-params="{id:'{{formData.studentID}}',sid:'{{currentSubject.id}}',t:'{{formData.time}}'}">
+                        <div class="mg-m"><span class="text-m text-em">考生信息</span></div>
+                        <div class="col-group">
+                            <div class="col-4">{{details.name}}</div>
+                            <div class="col-4">{{details.class}}</div>
+                            <div class="col-4">{{details.no}}</div>
+                        </div>
+                        <div class="col-group">
+                            <div class="col-4">{{details.subject}}</div>
+                            <div class="col-4">{{details.score}}分</div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+                    <!-- 录入提示 -->
+                    <div class="mg-m" details-info="../data/yuexuequan/subject-details.data" details-params="{id:'{{currentSubject.id}}',sid:'{{currentSubject.id}}',t:'{{formData.time}}'}">
+                        <div class="mg-m"><span class="text-m text-em">录入提示</span></div>
+                        <div class="col-group mg-m">
+                            <div class="col-6">当前科目未录入</div>
+                            <div class="col-6"><span class="text-xl">{{details.num1}}</span> <span class="text-s color-gray">/{{details.personCount}} 人</span></div>
+                        </div>
+                        <div class="col-group mg-m">
+                            <div class="col-6">成绩录入异常</div>
+                            <div class="col-6 color-red"><span class="text-xl">{{details.num2}}</span> <span class="text-s color-gray">人</span></div>
+                        </div>
+                        <div class="mg-m text-right">
+                            <a class="btn">查看录入情况</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

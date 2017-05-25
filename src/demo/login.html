@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit">
+    <!--[if lt IE 9]>
+    <meta http-equiv="Refresh" content="0;url=ie6.html"/>
+    <![endif]-->
+    <link rel="stylesheet" href="../ui/css/login.css">
+    <script src="../ui/libs/angular.min.js"></script>
+    <script src="../ui/libs/angularLocalStorage.js"></script>
+</head>
+<body>
+<div class="login-wrap" ng-app="app" ng-controller="myCtrl">
+    <div class="avatar">
+        <img src="../ui/img/default.png"/>
+    </div>
+    <div class="row"><input type="text" class="ipt" placeholder="请输入账号"/></div>
+    <div class="row"><input type="text" class="ipt" placeholder="请输入密码"/></div>
+    <div class="row">
+        <input type="text" class="ipt ipt-s" placeholder="验证码"/>
+        <img src="" class="fr captcha"/>
+    </div>
+    <div class="row">
+        <button type="submit" ng-click="submit()" class="btn">登 录</button>
+    </div>
+    <div class="row text-right"><a href="#">忘记密码？</a></div>
+</div>
+<div class="logo"><img src="../ui/img/logo.png"/></div>
+</body>
+<script>
+    var app =  angular.module('app',['LocalStorageModule']);
+    app.controller('myCtrl', function($scope,localStorageService) {
+
+        $scope.submit= function(){
+            localStorageService.set('user',{
+                level:'222',
+                token:'111',
+                name:'admin'
+            });
+            window.location.href="index.html#/base.html"
+        };
+    });
+</script>
+</html>

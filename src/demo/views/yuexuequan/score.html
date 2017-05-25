@@ -1,0 +1,135 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='example'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn exitImportScore"><i class="iconfont icon-back"></i></div>
+        <div class="title2">成绩</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mgb-l"><span class="text-l">录入成绩</span></div>
+        <div class="form-box import-score-wrap" ng-controller="importScoreCtrl"
+             ng-init="
+             formData.bj='高一1班';
+             notSaveScoreUrl='../data/form.data';
+             saveScoreUrl='../data/form.data';
+             "
+        >
+            <div class="form-tr">
+                <div class="form-th">第一步 {{hasScore}}</div>
+                <div class="form-td">
+                    <select class="select selectBanji" ng-model="formData.bj">
+                        <option value="高一1班">高一1班</option>
+                        <option value="高一2班">高一2班</option>
+                        <option value="高一3班">高一3班</option>
+                    </select>
+                    <select class="select selectKemu" ng-model="formData.km">
+                        <option value="">选择科目</option>
+                        <option value="语文">语文</option>
+                        <option value="数学">数学</option>
+                        <option value="英语">英语</option>
+                    </select>
+                    <input type="date" class="ipt ipt-short selectDate" ng-model="formData.date" convert-to-date/>
+                </div>
+            </div>
+            <div>
+                <div class="form-tr">
+                    <div class="form-th">第二步</div>
+                    <div class="form-td">
+                        <div class="mg-s">录入成绩:
+                            <select class="select"
+                                    ng-model="formData.importType"
+                                    ng-init="formData.importType='按姓名录入'"
+                                    ng-disabled="!canContinue"
+                            >
+                                <option value="按姓名录入">按姓名录入</option>
+                                <option value="按学号录入">按学号录入</option>
+                            </select>
+                        </div>
+                        <div class="mg-l">
+                            <span angucomplete
+                                  placeholder="输入考生姓名"
+                                  title-field="text"
+                                  url="../data/yuexuequan/select-person.data"
+                                  class="inline-block studentNameIpt"
+                                  ng-model="formData.studentName"
+                                  ng-change="typeStudent()"
+                                  ng-if="formData.importType=='按姓名录入'"
+                                  ng-disabled="!canContinue"
+                            ></span>
+                            <span angucomplete
+                                  placeholder="输入考生学号"
+                                  title-field="text"
+                                  url="../data/yuexuequan/select-person.data"
+                                  class="inline-block studentNameIpt"
+                                  ng-model="formData.studentID"
+                                  ng-change="typeStudent()"
+                                  ng-if="formData.importType=='按学号录入'"
+                                  ng-disabled="!canContinue"
+                            ></span>
+
+                            <input type="number" min="0" max="150"
+                                   class="ipt ipt-short studentScoreIpt"
+                                   ng-model="formData.studentScore"
+                                   ng-keyup="typeScore($event,'../data/form.data',formData)"
+                                   placeholder="输入成绩"
+                                   ng-disabled="!canContinue"
+                                   style="vertical-align: top;"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th">第三步</div>
+                    <div class="form-td" details-info="../data/yuexuequan/table-score.data?bj={{formData.bj}}&km={{formData.km}}&date={{formData.date}}&t={{formData.time}}">
+                        <div class="mg-s">
+                            录入详情（<span class="color-red">{{details.noScoreNum}}人未录入</span>，<span class="color-green">{{details.hasScoreNum}}人已录入</span>）
+                        </div>
+                        <div class="mg-s">
+                            <table class="table-list">
+                                <thead>
+                                <tr>
+                                    <th>班级</th>
+                                    <th>学号</th>
+                                    <th>姓名</th>
+                                    <th>科目</th>
+                                    <th width="100">成绩</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="tr in details.list">
+                                    <td>{{tr.col1}}</td>
+                                    <td>{{tr.col2}}</td>
+                                    <td>{{tr.col3}}</td>
+                                    <td>{{tr.col4}}</td>
+                                    <td click-edit="tr.score" status="canContinue" request-url="../data/yuexuequan/score.data">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-tr">
+                    <div class="form-th"></div>
+                    <div class="form-td">
+                        <button type="button" class="btn btn-gray notSaveBtn"
+                                ng-click="notSaveScore('确定不保存?')"
+                                ng-disabled="!canContinue"
+                        >不保存
+                        </button>
+                        <button type="button" class="btn saveBtn"
+                                ng-click="saveScore('你还没有保存当前录入记录,确定要保存?')"
+                                ng-disabled="!canContinue"
+                        >保 存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

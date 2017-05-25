@@ -1,0 +1,304 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='form'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">表单</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="mgb-l"><span class="text-l">表单元素</span></div>
+        <form name="myForm" form-validator action="../data/form.data">
+            <div class="form-tr">
+                <div class="form-th">输入框</div>
+                <div class="form-td">
+                    <input type="text" class="ipt" placeholder="输入框"/>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">日期</div>
+                <div class="form-td" ng-init="formData.date='2016-01-16'">
+                    <input type="date" class="ipt" ng-model="formData.date" convert-to-date/>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">日期2</div>
+                <div class="form-td" ng-init="formData.date2='2016-01-16'">
+                    <input type="text" class="ipt" ng-model="formData.date2" date-time view="date" min-view="date" format="YYYY-MM-DD"/>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">多选</div>
+                <div class="form-td">
+                    <div class="form-ctrl" ng-init="formData.checkbox=['选项2','选项3']">
+                        <label class="label"><input type="checkbox" value="选项1" name="checkbox1" checkbox-group="formData.checkbox"/> 选项1</label>
+                        <label class="label"><input type="checkbox" value="选项2" name="checkbox2" checkbox-group="formData.checkbox"/> 选项2</label>
+                        <label class="label"><input type="checkbox" value="选项3" name="checkbox3" checkbox-group="formData.checkbox"/> 选项3</label>
+                        <label class="label"><input type="checkbox" value="选项4" name="checkbox4" checkbox-group="formData.checkbox"/> 选项4</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">单选</div>
+                <div class="form-td">
+                    <div class="form-ctrl">
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio" value="选项1"/> 选项1</label>
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio" value="选项2"/> 选项2</label>
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio" value="选项3"/> 选项3</label>
+                        <label class="label"><input type="radio" name="radio" ng-model="formData.radio" value="选项4"/> 选项4</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">角色授权</div>
+                <div class="form-td">
+                    <fieldset class="fieldset">
+                        <legend>
+                            游戏管理
+                        </legend>
+                        <div>
+                            <label class="label">
+                                <input type="checkbox" name="b">
+                                服务区列表</label>
+                            <label class="label">
+                                <input type="checkbox" name="b">
+                                游戏接口</label>
+                            <label class="label">
+                                <input type="checkbox" name="b">
+                                游戏列表</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">自动补全</div>
+                <div class="form-td">
+                    <span angucomplete placeholder="输入" title-field="text" url="../data/autocomplete.data" class="inline-block" ng-model="formData.text"></span>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">下拉</div>
+                <div class="form-td">
+                    <select class="select">
+                        <option>下拉选择</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                    </select>
+                    <select class="select">
+                        <option>下拉选择</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                    </select>
+                    <select class="select">
+                        <option>下拉选择</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">下拉(固定宽度)</div>
+                <div class="form-td">
+                    <select class="select select-w">
+                        <option>下拉选择</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">下拉</div>
+                <div class="form-td">
+                    <div>
+                        <select class="select select-w" data-placeholder="选择一个..." chosen ng-model="formData.chosen1">
+                            <option value="1">United States</option>
+                            <option value="2">United Kingdom</option>
+                            <option value="3">Afghanistan</option>
+                            <option value="4">Aland Islands</option>
+                            <option value="5">Albania</option>
+                            <option value="6">Algeria</option>
+                            <option value="7">American Samoa</option>
+                            <option value="8">Andorra</option>
+                            <option value="9">Angola</option>
+                            <option value="10">Anguilla</option>
+                        </select>
+                    </div>
+                    <div class="mgt-m">
+                        <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="formData.chosen2">
+                            <option value="1">United States</option>
+                            <option value="2">United Kingdom</option>
+                            <option value="3">Afghanistan</option>
+                            <option value="4">Aland Islands</option>
+                            <option value="5">Albania</option>
+                            <option value="6">Algeria</option>
+                            <option value="7">American Samoa</option>
+                            <option value="8">Andorra</option>
+                            <option value="9">Angola</option>
+                            <option value="10">Anguilla</option>
+                        </select>
+                        {{formData.chosen2}}
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">
+                    打分
+                </div>
+                <div class="form-td" ng-init='formData.teacherList=[{aa:"a1",ruleIdList:["1","2"]},{aa:"a2",ruleIdList:"3"}]'>
+                    <score-config teacher-list="formData.teacherList" ng-model="scoreSelectCount">
+                        <div class="mgt-m" ng-repeat="teacher in teacherList">
+                            <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="teacher.ruleIdList">
+                                <option value="1">United States</option>
+                                <option value="2">United Kingdom</option>
+                                <option value="3">Afghanistan</option>
+                                <option value="4">Aland Islands</option>
+                                <option value="5">Albania</option>
+                                <option value="6">Algeria</option>
+                                <option value="7">American Samoa</option>
+                                <option value="8">Andorra</option>
+                                <option value="9">Angola</option>
+                                <option value="10">Anguilla</option>
+                            </select>
+                            <span details-info="../data/form.data?id={{teacher.bb.join(',')}}" ng-if="teacher.bb">
+                                <i class="iconfont icon-a icon-ok" ng-show="teacher.bb.length"></i>
+                            </span>
+                        </div>
+                    </score-config>
+                    <div class="mgt-m">
+                        <button type="button" class="btn" ng-disabled="formData.teacherList.length>scoreSelectCount">模拟提交</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">Ajax下拉</div>
+                <div class="form-td">
+                    <div>
+                        <select class="select select-w" data-placeholder="选择一个..." chosen chosen-ajax ng-model="formData.chosen3" select-source="../data/selectlist.data"></select>
+                    </div>
+                    <div class="mgt-m">
+                        <select class="select select-w" data-placeholder="选择一个..." chosen multiple chosen-ajax ng-model="formData.chosen4" select-source="../data/selectlist.data">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">异步下拉</div>
+                <div class="form-td">
+                    <select class="select" select-async="../data/selectlist.data" ng-model="formData.select1">
+                    </select>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">级联下拉</div>
+                <div class="form-td">
+                    <select relative-select relative-initload relative-to="#relativeSelect3" class="select" ng-model="formData.select2" name="select2">
+                        <option value="">请选择</option>
+                        <option value="0">Option 1</option>
+                        <option value="1">Option 2</option>
+                        <option value="2">Option 3</option>
+                        <option value="3">Option 4</option>
+                    </select>
+                    <select relative-select="../data/selectlist.data" relative-to="#relativeSelect4" class="select" ng-model="formData.select3" id="relativeSelect3" name="select3" select-first>
+                        <option value="">请选择</option>
+                    </select>
+                    <select relative-select="../data/selectlist.data" class="select" ng-model="formData.select4" id="relativeSelect4" name="select4">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">自定义</div>
+                <div class="form-td">
+                    <custom-config ng-model="formData.config">
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th width="30"></th>
+                                <th width="20%">Name</th>
+                                <th width="20%">Type</th>
+                                <th width="20%">Key</th>
+                                <th width="20%">Palceholder</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="tr in dataList">
+                                <td>{{$index+1}}</td>
+                                <td><input type="text" name="name" class="ipt ipt-block" placeholder="name" ng-model="tr.name"/></td>
+                                <td>
+                                    <select class="select select-block" name="type" ng-model="tr.type" ng-init="tr.type='text'">
+                                        <option value="text">文本</option>
+                                        <option value="checkbox">多选</option>
+                                        <option value="radio">单选</option>
+                                        <option value="select">下拉</option>
+                                        <option value="textarea">文本域</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" name="key" class="ipt ipt-block" placeholder="key" ng-model="tr.key"/></td>
+                                <td><input type="text" name="palceholder" class="ipt ipt-block" placeholder="placeholder" ng-model="tr.palceholder"/></td>
+                                <td>
+                                    <button type="button" class="btn btn-s btn-orange" ng-click="delRow($index)"><i class="iconfont icon-delete"></i> 删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td></td>
+                                <td colspan="5">
+                                    <button type="button" class="btn btn-s btn-primary" ng-click="addRow()"><i class="iconfont icon-plus"></i> 新增</button>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </custom-config>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">图片上传</div>
+                <div class="form-td">
+                    <div uploader="../data/upload.data" ng-model="formData.pics" upload-max="4" upload-size="200"></div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">上传文件</div>
+                <div class="form-td">
+                    <div uploader="../data/upload.data" ng-model="formData.files" upload-type="*"></div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th">自定义</div>
+                <div class="form-td" ng-init='formData.nameList=[{aa:"a1",bb:["1","2"]},{aa:"a2",bb:"3"}]'>
+                    <div class="form-tr" ng-repeat="tr in formData.nameList">
+                        <div class="form-td">
+                            <input type="text" class="ipt" ng-model="tr.aa"/>
+                        </div>
+                        <div class="form-td">
+                            <select class="select select-w" data-placeholder="选择一个..." chosen multiple ng-model="tr.bb">
+                                <option value="1">United States</option>
+                                <option value="2">United Kingdom</option>
+                                <option value="3">Afghanistan</option>
+                                <option value="4">Aland Islands</option>
+                                <option value="5">Albania</option>
+                                <option value="6">Algeria</option>
+                                <option value="7">American Samoa</option>
+                                <option value="8">Andorra</option>
+                                <option value="9">Angola</option>
+                                <option value="10">Anguilla</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-tr">
+                <div class="form-th"></div>
+                <div class="form-td">
+                    <button type="submit" class="btn btn-l">提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

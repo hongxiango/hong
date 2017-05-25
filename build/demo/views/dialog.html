@@ -1,0 +1,34 @@
+<div ng-controller="pageCtrl" ng-init="mainStatus.navigation='dialog'">
+    <div class="top-nav-wrap">
+        <div class="back backBtn"><i class="iconfont icon-back"></i></div>
+        <div class="title2">弹窗</div>
+        <div class="right">
+            <div class="nav">
+                <a class="li"><i class="iconfont icon-plus"></i></a>
+                <a class="li"><i class="iconfont icon-search"></i></a>
+                <a class="li"><i class="iconfont icon-bell"></i><i class="tip" ng-if="mainStatus.msgBubble">{{mainStatus.msgBubble}}</i></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-main">
+        <div class="form-tr">
+            <div class="form-th">弹窗</div>
+            <div class="form-td">
+                <button type="button" class="btn" modal-right="400" modal-scope="this" modal-data='{"id":123}'
+                        modal-url="views/list-view.html">右侧划出
+                </button>
+                <button type="button" class="btn" modal-center="400" modal-scope="this" modal-data='{"id":123}'
+                        modal-url="views/list-view.html">中间弹窗
+                </button>
+            </div>
+        </div>
+        <div class="form-tr">
+            <div class="form-th">编辑</div>
+            <div class="form-td">
+                <button type="button" class="btn" modal-right="400" modal-scope="this" modal-data='{"id":123}'
+                        modal-url="views/list-edit.html">编辑
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
